@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment Form</title>
+    <style>
+        .disabled {
+            background-color: #ddd;
+            cursor: default;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Enrollment</h1>
+    <form id="enrollmentForm">
+        <label for="rollNo">Roll No.:</label>
+        <input type="text" id="rollNo" name="rollNo" required disabled> <br>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required disabled> <br>
+
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class" required disabled> <br>
+
+        <label for="birthDate">Birth Date (YYYY-MM-DD):</label>
+        <input type="date" id="birthDate" name="birthDate" required disabled> <br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="4" cols="50" required disabled></textarea> <br>
+
+        <label for="enrollmentDate">Enrollment Date (YYYY-MM-DD):</label>
+        <input type="date" id="enrollmentDate" name="enrollmentDate" required disabled> <br>
+
+        <button type="button" id="saveBtn" disabled>Save</button>
+        <button type="button" id="updateBtn" disabled>Update</button>
+        <button type="reset" id="resetBtn">Reset</button>
+    </form>
+
+    <script>
+        const form = documentgetElementById('enrollmentForm');
+        const rollNoInput = document.getElementById('rollNo');
+        const fullNameInput = document.getElementById('fullName');
+        const classInput = document.getElementById('class');
+        const birthDateInput = document.getElementById('birthDate');
+        const addressInput = document.getElementById('address');
+        const enrollmentDateInput = document.getElementById('enrollmentDate');
+        const saveBtn = document.getElementById('saveBtn');
+        const updateBtn = document.getElementById('updateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        // Simulate database interaction (replace with actual database calls)
+        let studentData = {};
+
+        function clearForm() {
+            rollNoInput.value = '';
+            fullNameInput.value = '';
+            classInput.value = '';
+            birthDateInput.value = '';
+            addressInput.value = '';
+            enrollmentDateInput.value = '';
+
+            disableAllInputs();
+            saveBtn.disabled = true;
+            updateBtn.disabled = true;
+            rollNoInput.focus(); // Set focus to roll number on reset
+        }
+
+        function disableAllInputs() {
+            rollNoInput.disabled = true;
+            fullNameInput.disabled = true;
+            classInput.disabled = true;
+            birthDateInput.disabled = true;
+            addressInput.disabled = true;
+            enrollmentDateInput.disabled = true;
+        }
+
+        function enableForEdit() {
+            fullNameInput.disabled = false;
+            classInput.disabled = false;
+            birthDateInput.disabled = false;
+            addressInput.disabled = false;
+            enrollmentDateInput.disabled = false;
+            saveBtn.disabled = true;
+            updateBtn.disabled = false;
+        }
+
+        function enableForNew() {
+            fullNameInput.disabled = false;
+            classInput.disabled = false;
+            birthDateInput.disabled = false;
+            addressInput.disabled = false;
+            enrollmentDateInput.disabled = false;
+            saveBtn.disabled = false;
+            updateBtn.disabled = true;
+        }
+
+        function populateForm(data) {
+            rollNoInput.value = data.rollNo;
+            fullNameInput.value = data.fullName;
+            classInput.value = data.class;
+            birthDateInput.value = data.birthDate;
+            addressInput.value = data.address;
+            enrollmentDateInput.value = data.enrollmentDate;
+        }
+
+        function validateForm() {
+            return rollNoInput.value !== '' &&
+                   fullNameInput.value !== '' &&
+                   classInput.value !== '' &&
